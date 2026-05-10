@@ -59,4 +59,16 @@ Route::middleware(['auth', 'verified'])
         Route::get('/hasil', [\App\Http\Controllers\Student\HasilController::class, 'index'])->name('hasil.index');
     });
 
+Route::middleware('auth')->group(function () {
+
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+        ->name('profile.destroy');
+
+});
 require __DIR__.'/auth.php';

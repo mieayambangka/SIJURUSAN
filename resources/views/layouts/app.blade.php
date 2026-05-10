@@ -17,8 +17,9 @@
 </head>
 
 <body class="font-sans bg-gray-50 text-gray-800 antialiased">
-    <div class="min-h-screen ">
+    <div class="min-h-screen flex flex-col">
         @include('components.navbar')
+         <!-- <x-navbar /> -->
 
         <!-- Page Heading -->
         <!-- @if (isset($header))
@@ -34,7 +35,7 @@
             @yield('content')
         </main>
 
-        @include('components.footer')
+       @include('components.footer')
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>

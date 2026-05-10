@@ -4,7 +4,7 @@
 
 @section('content')
 
-<section class="min-h-screen grid lg:grid-cols-2">
+<section class="h-screen overflow-hidden grid lg:grid-cols-2">
 
     {{-- LEFT --}}
     <div class="flex items-center justify-center px-8 py-12 bg-white">
@@ -121,9 +121,12 @@
                     <label class="flex items-center gap-2 text-sm text-gray-600">
 
                         <input
+                            id="remember"
                             type="checkbox"
                             name="remember"
+                            value="1"
                             class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+
 
                         Remember me
 
@@ -180,53 +183,73 @@
 
     </div>
 
-   {{-- RIGHT --}}
-<div class="hidden lg:flex items-center justify-center bg-gray-50 overflow-hidden">
+    {{-- RIGHT --}}
+    <div class="hidden lg:flex items-center justify-center bg-gray-50 overflow-hidden">
 
-    <div class="w-full max-w-xl px-8 pt-8">
+        <div class="w-full max-w-xl px-8 pt-8">
 
-        {{-- Back Button --}}
-        <div class="flex justify-end mb-8 -translate-y-20">
+            {{-- Back Button --}}
+            <div class="flex justify-end mb-8 -translate-y-10">
 
-            <a href="{{ route('welcome') }}"
-               title="Kembali ke Beranda"
-               class="w-11 h-11 rounded-full border border-gray-300
+                <a href="{{ route('welcome') }}"
+                    title="Kembali ke Beranda"
+                    class="w-11 h-11 rounded-full border border-gray-300
                       flex items-center justify-center
                       text-gray-600 hover:text-blue-600
                       hover:border-blue-600
                       transition">
 
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="w-5 h-5"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor">
 
-                    <path stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M15 19l-7-7 7-7" />
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 19l-7-7 7-7" />
 
-                </svg>
+                    </svg>
 
-            </a>
+                </a>
 
-        </div>
+            </div>
 
-        {{-- Illustration --}}
-        <div>
+            {{-- Illustration --}}
+            <div>
 
-            <img
-                src="{{ asset('Learning-bro (1).png') }}"
-                alt="Siswa SMK"
-                class="w-full object-contain"
-            >
+                <img
+                    src="{{ asset('Learning-bro (1).png') }}"
+                    alt="Siswa SMK"
+                    class="w-full object-contain">
+
+            </div>
+            {{-- Feature pills --}}
+            <div class="flex flex-wrap justify-center gap-2 mt-8">
+                <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 text-gray-600 text-xs font-medium px-3 py-1.5 rounded-full shadow-sm">
+                    <svg class="w-3.5 h-3.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    Berbasis Metode SAW
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 text-gray-600 text-xs font-medium px-3 py-1.5 rounded-full shadow-sm">
+                    <svg class="w-3.5 h-3.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    Hasil Akurat & Objektif
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-white border border-gray-200 text-gray-600 text-xs font-medium px-3 py-1.5 rounded-full shadow-sm">
+                    <svg class="w-3.5 h-3.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    Gratis untuk Siswa
+                </span>
+            </div>
 
         </div>
 
     </div>
-
-</div>
 
 </section>
 

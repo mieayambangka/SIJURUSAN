@@ -13,15 +13,16 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="bg-gray-50 text-gray-800 antialiased">
-        <div class="min-h-screen">
+        <div class="min-h-screen flex flex-col">
             @include('components.navbar')
-            <x-student-header />
+            <!-- <x-student-header /> -->
 
-            <main class="container mx-auto px-4 py-8">
+           <main class="container mx-auto px-4 py-8">
                 <x-alerts />
                 @yield('content')
             </main>
             @include('components.footer')
+             <!-- <x-footer /> -->
         </div>
 
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>

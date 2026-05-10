@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -16,7 +17,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        return view('student.profile.edit', [
             'user' => $request->user(),
         ]);
     }
@@ -26,15 +27,29 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        // Update password jika diisi
+        if ($request->filled('password')) {
+
+            $user->password = Hash::make($request->password);
+
         }
 
-        $request->user()->save();
+        // Reset verifikasi email jika email berubah
+        if ($user->isDirty('email')) {
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+            $user->email_verified_at = null;
+
+        }
+
+        $user->save();
+
+        return Redirect::route('profile.edit')
+            ->with('success', 'Profile berhasil diperbarui.');
     }
 
     /**
