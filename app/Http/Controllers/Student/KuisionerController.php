@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\JawabanSiswa;
+use App\Models\HasilRekomendasi;
 use App\Models\Pertanyaan;
+use App\Models\NilaiSiswa;
 use Illuminate\Http\Request;
 
 class KuisionerController extends Controller
@@ -53,6 +55,11 @@ class KuisionerController extends Controller
 
     public function store(Request $request)
     {
+        // Cek authentication
+        if (!$request->user()) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
         $student = $request->user();
 
         // Cek apakah sudah mengisi nilai
@@ -64,7 +71,12 @@ class KuisionerController extends Controller
         $totalQuestions = $pertanyaans->count();
         $perPage = 10;
         $totalPages = ceil($totalQuestions / $perPage);
-        $currentPage = $request->get('current_page', 1);
+        $currentPage = (int)$request->get('current_page', 1);
+
+        // Validasi current page
+        if ($currentPage < 1 || $currentPage > $totalPages) {
+            $currentPage = 1;
+        }
 
         // Jika ini bukan step terakhir, simpan jawaban step ini dan lanjut ke step berikutnya
         if ($currentPage < $totalPages) {
@@ -77,7 +89,17 @@ class KuisionerController extends Controller
                 $rules["jawaban.{$pertanyaan->id}"] = 'required|integer|min:1|max:5';
             }
 
-            $validated = $request->validate($rules);
+            try {
+                $validated = $request->validate($rules);
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                if ($request->expectsJson()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Silakan jawab semua pertanyaan.'
+                    ], 422);
+                }
+                return back()->withErrors($e->validator);
+            }
 
             // Simpan jawaban step ini
             foreach ($validated['jawaban'] as $pertanyaanId => $score) {
@@ -94,17 +116,17 @@ class KuisionerController extends Controller
             if ($request->expectsJson() || $request->ajax()) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Jawaban step ' . $currentPage . ' berhasil disimpan.',
+                    'message' => 'Jawaban berhasil disimpan.',
                     'next_page' => $currentPage + 1
                 ]);
             }
 
             // Jika bukan AJAX, redirect seperti biasa
             return redirect()->route('student.kuisioner.index', ['page' => $currentPage + 1])
-                ->with('success', 'Jawaban step ' . $currentPage . ' berhasil disimpan.');
+                ->with('success', 'Jawaban berhasil disimpan.');
         }
 
-        // Jika ini step terakhir, simpan jawaban halaman terakhir saja dan hitung rekomendasi
+        // Jika ini step terakhir, simpan jawaban halaman terakhir  dan hitung rekomendasi
         $offset = ($currentPage - 1) * $perPage;
         $currentStepQuestions = $pertanyaans->slice($offset, $perPage);
 
@@ -113,7 +135,17 @@ class KuisionerController extends Controller
             $rules["jawaban.{$pertanyaan->id}"] = 'required|integer|min:1|max:5';
         }
 
-        $validated = $request->validate($rules);
+        try {
+            $validated = $request->validate($rules);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Silakan jawab semua pertanyaan.'
+                ], 422);
+            }
+            return back()->withErrors($e->validator);
+        }
 
         // Simpan jawaban halaman terakhir
         foreach ($validated['jawaban'] as $pertanyaanId => $score) {
@@ -127,9 +159,24 @@ class KuisionerController extends Controller
         }
 
         // Hitung dan simpan rekomendasi
-        $sawService = app(\App\Services\SAWService::class);
-        $sawService->persistRecommendations($student);
-
+        try {
+            $sawService = app(\App\Services\SAWService::class);
+            $sawService->persistRecommendations($student);
+        } catch (\Exception $e) {
+            \Log::error('SAW Service Error: ' . $e->getMessage());
+        }
         return redirect()->route('student.hasil.index')->with('success', 'Kuisioner berhasil disimpan. Lihat hasil rekomendasi jurusan Anda.');
+    }
+
+    public function reset(Request $request)
+    {
+        $student = $request->user();
+
+        JawabanSiswa::where('user_id', $student->id)->delete();
+        HasilRekomendasi::where('user_id', $student->id)->delete();
+        NilaiSiswa::where('user_id', $student->id)->delete();
+
+        return redirect()->route('student.nilai.index')
+            ->with('success', 'Semua data lama telah direset. Silakan input nilai kembali dari awal.');
     }
 }
