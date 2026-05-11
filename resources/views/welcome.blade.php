@@ -53,17 +53,14 @@
             </div>
         @elseif(!$hasHasil)
             <div class="mt-7 flex flex-wrap gap-3" data-aos="fade-up" data-aos-delay="500">
-                <form method="POST" action="{{ route('student.hasil.index') }}" class="inline">
-                    @csrf
-                    <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition shadow-sm hover:shadow-lg transform hover:-translate-y-0.5">
-                        Lihat Hasil Rekomendasi
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />
-                        </svg>
-                    </button>
-                </form>
+                <a href="{{ route('student.hasil.index') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition shadow-sm">
+                    Lihat Hasil Rekomendasi
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />
+                    </svg>
+                </a>
             </div>
         @else
             <div class="mt-7 flex flex-wrap gap-3" data-aos="fade-up" data-aos-delay="500">
@@ -157,12 +154,9 @@
                         <div class="text-xs text-gray-400">Lihat rekomendasi jurusan</div>
                     </div>
                     @if($hasNilai && $hasJawaban && !$hasHasil)
-                        <form method="POST" action="{{ route('student.hasil.index') }}" class="inline">
-                            @csrf
-                            <button type="submit" class="text-xs text-blue-600 hover:text-blue-700 font-medium">
-                                Proses →
-                            </button>
-                        </form>
+                        <a href="{{ route('student.hasil.index') }}" class="text-xs text-blue-600 hover:text-blue-700 font-medium">
+                            Proses →
+                        </a>
                     @elseif($hasHasil)
                         <a href="{{ route('student.hasil.index') }}" class="text-xs text-blue-600 hover:text-blue-700 font-medium">
                             Lihat →

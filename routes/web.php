@@ -55,6 +55,7 @@ Route::middleware(['auth', 'verified'])
         Route::post('/nilai', [\App\Http\Controllers\Student\NilaiController::class, 'store'])->name('nilai.store');
         Route::get('/kuisioner', [\App\Http\Controllers\Student\KuisionerController::class, 'index'])->name('kuisioner.index');
         Route::post('/kuisioner', [\App\Http\Controllers\Student\KuisionerController::class, 'store'])->name('kuisioner.store');
+        Route::get('/ulang', [\App\Http\Controllers\Student\KuisionerController::class, 'reset'])->name('ulang');
         Route::get('/hasil', [\App\Http\Controllers\Student\HasilController::class, 'index'])->name('hasil.index');
     });
 

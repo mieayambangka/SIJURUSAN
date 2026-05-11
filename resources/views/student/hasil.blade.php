@@ -44,15 +44,9 @@
                                 </div>
 
                                 <div class="ml-13 space-y-2">
-                                    <div class="flex items-center space-x-4">
-                                        <div class="text-sm text-gray-600">
-                                            <span class="font-medium">Skor SAW:</span>
-                                            <span class="text-lg font-bold text-blue-600">{{ number_format($rec->score, 4) }}</span>
-                                        </div>
-                                        <div class="text-sm text-gray-600">
-                                            <span class="font-medium">Persentase:</span>
-                                            <span class="text-lg font-bold text-green-600">{{ number_format(($rec->score / $recommendations->first()->score) * 100, 1) }}%</span>
-                                        </div>
+                                    <div class="text-sm text-gray-600">
+                                        <span class="font-medium">Skor SAW:</span>
+                                        <span class="text-lg font-bold text-blue-600">{{ number_format($rec->score, 4) }}</span>
                                     </div>
 
                                     @if($rec->meta && isset($rec->meta['details']))
@@ -88,13 +82,13 @@
 
             <div class="mt-8 text-center">
                 <p class="text-gray-600 mb-4">Rekomendasi ini dihitung menggunakan metode SAW (Simple Additive Weighting) berdasarkan nilai akademik dan minat bakat Anda.</p>
-                <div class="flex justify-center space-x-4">
+                <div class="flex justify-center flex-wrap gap-4">
                     <a href="{{ route('student.dashboard') }}" class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
                         Kembali ke Dashboard
                     </a>
-                    <button onclick="window.print()" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                        Cetak Hasil
-                    </button>
+                    <a href="{{ route('student.ulang') }}" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        Kerjakan Ulang Kuisioner
+                    </a>
                 </div>
             </div>
         @endif
