@@ -1,4 +1,4 @@
-<nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+<nav class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
 
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 

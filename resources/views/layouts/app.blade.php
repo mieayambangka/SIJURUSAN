@@ -8,46 +8,70 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
+    {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
-    <!-- Scripts -->
+
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap"
+          rel="stylesheet" />
+
+    {{-- AOS --}}
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+    {{-- Vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
-<body class="font-sans bg-gray-50 text-gray-800 antialiased">
+<body class="font-sans bg-gray-50 text-gray-800 antialiased overflow-x-hidden">
+
     <div class="min-h-screen flex flex-col">
+
+        {{-- Navbar --}}
         @include('components.navbar')
-         <!-- <x-navbar /> -->
 
-        <!-- Page Heading -->
-        <!-- @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif -->
+        {{-- Banner --}}
+        @include('components.banner')
 
-        <!-- Page Content -->
-        <main class="container mx-auto px-4 py-8">
+        {{-- Trust Section --}}
+        @include('components.trust-sec')
+
+        {{-- How It Works --}}
+        @include('components.how-it-works')
+
+        {{--preview--}}
+        @include('components.preview-sect')
+
+        {{-- CTA --}}
+        @include('components.cta')
+        
+        {{-- Main Content --}}
+        <main class="flex-1 w-full">
+
             @yield('content')
+
         </main>
 
-       @include('components.footer')
+        {{-- Footer --}}
+        @include('components.footer')
+
     </div>
 
+    {{-- AOS --}}
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+
             AOS.init({
                 once: true,
                 easing: 'ease-out-cubic',
                 offset: 50
             });
+
         });
     </script>
+
 </body>
 
 </html>
