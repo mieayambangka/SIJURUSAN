@@ -1,9 +1,4 @@
-@extends('layouts.admin')
-
-@section('title', 'Data Siswa')
-@section('subtitle', 'Lihat siswa, nilai akademik, jawaban kuisioner, dan rekomendasi')
-
-@section('content')
+<x-admin-layout title="Daftar Siswa"  subtitle="Lihat semua siswa yang telah terdaftar dalam sistem">
     <div class="grid gap-4">
         @foreach($siswa as $user)
             <div class="rounded-3xl bg-white p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -18,4 +13,4 @@
     </div>
 
     <div class="mt-6">{{ $siswa->links() }}</div>
-@endsection
+</x-admin-layout>

@@ -1,9 +1,4 @@
-@extends('layouts.admin')
-
-@section('title', 'Detail Siswa')
-@section('subtitle', 'Lihat nilai, jawaban kuisioner, dan rekomendasi untuk siswa ini')
-
-@section('content')
+<x-admin-layout title="Rincian Siswa"  subtitle="Detail informasi siswa, nilai akademik, jawaban kuisioner, dan hasil rekomendasi">
     <div class="rounded-3xl bg-white p-6 border border-slate-200 shadow-sm mb-6">
         <div class="grid gap-3 sm:grid-cols-2">
             <div>
@@ -61,4 +56,4 @@
             @endforelse
         </div>
     </div>
-@endsection
+</x-admin-layout>

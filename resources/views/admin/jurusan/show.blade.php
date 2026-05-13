@@ -1,9 +1,5 @@
-@extends('layouts.admin')
 
-@section('title', 'Detail Jurusan')
-@section('subtitle', 'Informasi lengkap jurusan serta kriteria dan pertanyaan terkait')
-
-@section('content')
+<x-admin-layout title="Detail jurusan"  subtitle="Informasi lengkap jurusan serta kriteria dan pertanyaan terkait">
     <div class="rounded-3xl bg-white p-6 border border-slate-200 shadow-sm mb-6">
         <div class="grid gap-4 sm:grid-cols-2">
             <div>
@@ -50,4 +46,4 @@
             </div>
         </section>
     </div>
-@endsection
+</x-admin-layout>

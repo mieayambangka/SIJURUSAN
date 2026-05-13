@@ -1,9 +1,5 @@
-@extends('layouts.admin')
 
-@section('title', 'Kelola Jurusan')
-@section('subtitle', 'Tambahkan, edit, dan lihat detail jurusan SMK')
-
-@section('content')
+<x-admin-layout title="Jurusan"  subtitle="Kelola jurusan untuk penjurusan siswa">
     <div class="flex items-center justify-between gap-4 mb-6">
         <div>
             <h2 class="text-lg font-semibold text-slate-900">Data Jurusan</h2>
@@ -40,4 +36,4 @@
     <div class="mt-6">
         {{ $jurusans->links() }}
     </div>
-@endsection
+</x-admin-layout>

@@ -1,9 +1,5 @@
-@extends('layouts.admin')
 
-@section('title', 'Bobot Jurusan')
-@section('subtitle', 'Pilih kriteria dan tetapkan bobot setiap jurusan')
-
-@section('content')
+<x-admin-layout title="Bobot Jurusan"  subtitle="Pilih kriteria dan tetapkan bobot setiap jurusan">
     <div class="rounded-3xl bg-white p-6 border border-slate-200 shadow-sm mb-6">
         <p class="text-sm text-slate-500">Alur konfigurasi: buat jurusan > pilih kriteria > atur bobot sampai total 100%.</p>
     </div>
@@ -19,4 +15,4 @@
             </div>
         @endforeach
     </div>
-@endsection
+</x-admin-layout>

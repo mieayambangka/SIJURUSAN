@@ -1,9 +1,5 @@
-@extends('layouts.admin')
 
-@section('title', 'Kelola Kriteria')
-@section('subtitle', 'Tambahkan kriteria akademik dan minat secara dinamis')
-
-@section('content')
+<x-admin-layout title="Kriteria"  subtitle="Kelola kriteria untuk penjurusan siswa"> 
     <div class="flex items-center justify-between gap-4 mb-6">
         <div>
             <h2 class="text-lg font-semibold text-slate-900">Data Kriteria</h2>
@@ -34,4 +30,5 @@
     </div>
 
     <div class="mt-6">{{ $kriterias->links() }}</div>
-@endsection
+
+</x-admin-layout>

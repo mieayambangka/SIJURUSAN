@@ -1,9 +1,5 @@
-@extends('layouts.admin')
 
-@section('title', 'Edit Kriteria')
-@section('subtitle', 'Perbarui kriteria untuk penghitungan SAW')
-
-@section('content')
+<x-admin-layout title="Edit kriteria"  subtitle="Perbarui kriteria untuk penghitungan SAW">
     <div class="rounded-3xl bg-white p-6 border border-slate-200 shadow-sm">
         <form action="{{ route('admin.kriteria.update', $kriteria->id) }}" method="POST" class="space-y-6">
             @csrf
@@ -41,4 +37,4 @@
             </div>
         </form>
     </div>
-@endsection
+</x-admin-layout>

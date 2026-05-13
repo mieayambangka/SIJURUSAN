@@ -1,9 +1,5 @@
-@extends('layouts.admin')
 
-@section('title', 'Atur Bobot Jurusan')
-@section('subtitle', 'Tetapkan bobot kriteria akademik dan minat untuk jurusan')
-
-@section('content')
+<x-admin-layout title="Edit Bobot Jurusan"  subtitle="Pilih kriteria dan tetapkan bobot setiap jurusan">
     <div class="rounded-3xl bg-white p-6 border border-slate-200 shadow-sm">
         <form action="{{ route('admin.bobot.update', $jurusan) }}" method="POST">
             @csrf
@@ -90,4 +86,5 @@
             </div>
         </form>
     </div>
-@endsection
+</x-admin-layout>
+

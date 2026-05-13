@@ -26,34 +26,17 @@
 <body class="font-sans bg-gray-50 text-gray-800 antialiased overflow-x-hidden">
 
     <div class="min-h-screen flex flex-col">
-
-        {{-- Navbar --}}
-        @include('components.navbar')
-
-        {{-- Banner --}}
-        @include('components.banner')
-
-        {{-- Trust Section --}}
-        @include('components.trust-sec')
-
-        {{-- How It Works --}}
-        @include('components.how-it-works')
-
-        {{--preview--}}
-        @include('components.preview-sect')
-
-        {{-- CTA --}}
-        @include('components.cta')
+        <x-navbar />
+       
         
         {{-- Main Content --}}
         <main class="flex-1 w-full">
 
-            @yield('content')
+            {{ $slot }}
 
         </main>
 
-        {{-- Footer --}}
-        @include('components.footer')
+      <x-footer />
 
     </div>
 

@@ -1,9 +1,8 @@
-@extends('layouts.admin')
 
-@section('title', 'Tambah Jurusan')
-@section('subtitle', 'Buat jurusan baru sebelum mengatur bobot dan pertanyaan')
-
-@section('content')
+<x-admin-layout title="Tambah jurusan"  subtitle="Buat jurusan baru sebelum mengatur bobot dan pertanyaan">
+        <div class="rounded-3xl bg-white p-6 border border-slate-200 shadow-sm mb-6">
+            <p class="text-sm text-slate-500">Isi informasi jurusan baru. Setelah menyimpan, lanjutkan ke pengaturan bobot untuk menentukan kriteria penjurusan.</p>
+     
     <div class="rounded-3xl bg-white p-6 border border-slate-200 shadow-sm">
         <form action="{{ route('admin.jurusan.store') }}" method="POST" class="space-y-6">
             @csrf
@@ -31,4 +30,4 @@
             </div>
         </form>
     </div>
-@endsection
+</x-admin-layout>

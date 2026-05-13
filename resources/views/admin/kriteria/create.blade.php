@@ -1,9 +1,7 @@
-@extends('layouts.admin')
 
-@section('title', 'Tambah Kriteria')
-@section('subtitle', 'Tambahkan kriteria baru untuk digunakan dalam bobot jurusan')
-
-@section('content')
+<x-admin-layout title="Tambah Kriteria"  subtitle="Tambahkan kriteria baru untuk digunakan dalam bobot jurusan">
+        <div class="rounded-3xl bg-white p-6 border border-slate-200 shadow-sm mb-6">
+            <p class="text-sm text-slate-500">Isi informasi kriteria baru. Pastikan untuk menentukan tipe data dan nilai maksimum yang sesuai.</p>
     <div class="rounded-3xl bg-white p-6 border border-slate-200 shadow-sm">
         <form action="{{ route('admin.kriteria.store') }}" method="POST" class="space-y-6">
             @csrf
@@ -40,4 +38,4 @@
             </div>
         </form>
     </div>
-@endsection
+</x-admin-layout>

@@ -1,9 +1,7 @@
-@extends('layouts.admin')
 
-@section('title', 'Edit Jurusan')
-@section('subtitle', 'Perbarui nama, deskripsi, atau status jurusan')
-
-@section('content')
+<x-admin-layout title="Edit jurusan"  subtitle="Perbarui nama, deskripsi, atau status jurusan">
+     <div class="rounded-3xl bg-white p-6 border border-slate-200 shadow-sm mb-6">
+        <p class="text-sm text-slate-500">Edit informasi jurusan. Pastikan untuk menyimpan perubahan setelah selesai.</p>
     <div class="rounded-3xl bg-white p-6 border border-slate-200 shadow-sm">
         <form action="{{ route('admin.jurusan.update', $jurusan) }}" method="POST" class="space-y-6">
             @csrf
@@ -32,4 +30,5 @@
             </div>
         </form>
     </div>
-@endsection
+
+</x-admin-layout>
