@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Admin SPK',
                 'password' => Hash::make('password123'),
+                'role' => 'admin',
                 'email_verified_at' => now(),
             ]
         );
