@@ -73,12 +73,12 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 
 
-        Route::get('/dashboard', function () {
-    if (auth()->user()->role === 'admin') {
-        return redirect()->route('admin.dashboard');
-    }
+    Route::get('/dashboard', function () {
+        if (auth()->user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
 
-    return redirect()->route('student.dashboard');
-})->middleware('auth');
+        return redirect()->route('student.dashboard');
+    })->middleware('auth');
 });
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

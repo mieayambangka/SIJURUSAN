@@ -8,23 +8,26 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckRole
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
-     */
     public function handle(Request $request, Closure $next, string $role): Response
     {
         if (!$request->user()) {
             return redirect()->route('login');
         }
 
-        if ($role === 'admin' && $request->user()->email !== 'admin@spk.local') {
-            abort(403, 'Akses ditolak. Hanya admin yang bisa mengakses halaman ini.');
-        }
+        // kalau role tidak sesuai
+        if ($request->user()->role !== $role) {
 
-        if ($role === 'student' && $request->user()->email === 'admin@spk.local') {
-            return redirect()->route('admin.dashboard');
+            // optional: beda pesan sesuai role
+            if ($role === 'admin') {
+                abort(403, 'Akses ditolak. Halaman ini khusus King Beni.');
+            }
+
+            if ($role === 'student') {
+                abort(403, 'Akses ditolak. Halaman ini khusus Jelata.');
+            }
+
+            // fallback default
+            abort(403, 'Akses ditolak.');
         }
 
         return $next($request);
