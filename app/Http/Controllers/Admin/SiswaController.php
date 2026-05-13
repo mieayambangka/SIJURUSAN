@@ -12,11 +12,13 @@ use Illuminate\Http\Request;
 class SiswaController extends Controller
 {
     public function index()
-    {
-        $siswa = User::withCount(['jawabanSiswas', 'nilaiSiswas', 'hasilRekomendasis'])->paginate(15);
+{
+    $siswa = User::where('role', 'student')
+        ->withCount(['jawabanSiswas', 'nilaiSiswas', 'hasilRekomendasis'])
+        ->paginate(15);
 
-        return view('admin.siswa.index', compact('siswa'));
-    }
+    return view('admin.siswa.index', compact('siswa'));
+}
 
     public function show(User $user)
     {
