@@ -13,9 +13,9 @@ class IsAdministrator
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, string $role = 'admin'): Response
     {
-        if ($request->user()->role !== 'admin') {
+        if ($request->user()->role !== $role) {
             abort(403, 'Akses ditolak, hanya admin yang bisa akses page ini');
         }
 

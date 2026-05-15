@@ -40,6 +40,9 @@
         <a href="{{ route('admin.hasil.index') }}" class="group block rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.hasil.*') ? 'bg-slate-800 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
             Hasil Rekomendasi
         </a>
+        <a href="{{ route('admin.users.index') }}" class="group block rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.users.*') ? 'bg-slate-800 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+            Kelola User
+        </a>
     </nav>
 
     <div class="mt-auto px-6 py-5 border-t border-slate-800 text-xs text-slate-500">

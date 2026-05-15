@@ -23,13 +23,18 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Jurusan
+Route::get('/jurusan', function () {
+    return view('components.jurusan-menu');
+})->name('jurusan');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'verified', IsAdministrator::class])
+Route::middleware(['auth', IsAdministrator::class])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -44,9 +49,10 @@ Route::middleware(['auth', 'verified', IsAdministrator::class])
         Route::get('siswa/{user}', [\App\Http\Controllers\Admin\SiswaController::class, 'show'])->name('siswa.show');
         Route::get('hasil-rekomendasi', [\App\Http\Controllers\Admin\HasilRekomendasiController::class, 'index'])->name('hasil.index');
         Route::get('hasil-rekomendasi/{user}', [\App\Http\Controllers\Admin\HasilRekomendasiController::class, 'show'])->name('hasil.show');
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['show']);
     });
 
-Route::middleware(['auth', 'verified', IsStudent::class])
+Route::middleware(['auth', IsStudent::class])
     ->prefix('student')
     ->name('student.')
     ->group(function () {
@@ -70,6 +76,5 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
-
 });
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
