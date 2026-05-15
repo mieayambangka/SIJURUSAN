@@ -11,12 +11,40 @@ class HasilRekomendasiController extends Controller
 {
     public function index()
     {
-        $recommendations = HasilRekomendasi::with(['user', 'jurusan'])
-            ->orderBy('user_id')
+        // Fetch all recommendations grouped by user, ordered by score
+        $allRecommendations = HasilRekomendasi::with(['user', 'jurusan'])
             ->orderByDesc('score')
-            ->paginate(20);
+            ->get();
 
-        return view('admin.hasil.index', compact('recommendations'));
+        // Format data for frontend JavaScript
+        $groupedByUser = $allRecommendations->groupBy('user_id');
+        $studentRecommendations = $groupedByUser->map(function ($userRecs) {
+            $firstRec = $userRecs->first();
+            if (!$firstRec || !$firstRec->user) {
+                return null;
+            }
+            
+            $user = $firstRec->user;
+            $recs = $userRecs->take(3)->map(function ($rec) {
+                return [
+                    'j' => $rec->jurusan->name ?? 'Unknown',
+                    's' => floatval($rec->score),
+                ];
+            })->values()->toArray();
+
+            // Skip if less than 3 recommendations or has missing data
+            if (count($recs) < 1) {
+                return null;
+            }
+
+            return [
+                'id' => '#ST' . str_pad($user->id, 4, '0', STR_PAD_LEFT),
+                'name' => $user->name,
+                'recs' => $recs,
+            ];
+        })->filter()->values()->toArray();
+
+        return view('admin.hasil.index', compact('studentRecommendations'));
     }
 
     public function show(User $user)

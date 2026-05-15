@@ -21,7 +21,7 @@
             </div>
         @else
             <div class="space-y-6">
-                @foreach($recommendations as $index => $rec)
+                @foreach($recommendations->take(3) as $index => $rec)
                     <div class="border border-gray-200 rounded-xl p-6 {{ $index === 0 ? 'bg-yellow-50 border-yellow-300' : 'bg-white' }}">
                         @if($index === 0)
                             <div class="flex items-center space-x-2 mb-4">
