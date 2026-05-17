@@ -15,7 +15,7 @@ class IsStudent
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->role !== 'student') {
+        if ($request->user()->role !== 'siswa') {
             abort(403, 'Akses ditolak, hanya siswa yang bisa akses page ini');
         }
 
